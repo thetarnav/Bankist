@@ -5,16 +5,26 @@ export default {
 	// Global page headers (https://go.nuxtjs.dev/config-head)
 	head: {
 		title: 'Bankist',
+		htmlAttrs: {
+			lang: 'en',
+		},
 		meta: [
 			{ charset: 'utf-8' },
 			{ name: 'viewport', content: 'width=device-width, initial-scale=1' },
 			{ hid: 'description', name: 'description', content: '' },
 		],
-		link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+		link: [
+			{ rel: 'shortcut icon', type: 'image/png', href: 'img/icon.png' },
+			{
+				rel: 'stylesheet',
+				href:
+					'https://fonts.googleapis.com/css?family=Poppins:300,400,500,600&display=swap',
+			},
+		],
 	},
 
 	// Global CSS (https://go.nuxtjs.dev/config-css)
-	css: [],
+	css: ['@/assets/style.css'],
 
 	// Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
 	plugins: [],
