@@ -129,7 +129,7 @@ img {
 	animation: nav-from-sticky 0.3s;
 }
 
-/* nav and stickly class at the same time */
+/* nav and sticky class at the same time */
 .nav.sticky {
 	position: fixed;
 	background-color: rgba(255, 255, 255, 0.95);
