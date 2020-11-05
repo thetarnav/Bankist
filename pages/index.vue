@@ -1,11 +1,12 @@
 <template>
-<div class="container">
-   <Header />
-   <Features />
-   <Operations />
-   <Testimonials />
-   <Footer />
-</div>
+	<div class="container">
+		<Nav />
+		<Header />
+		<Features />
+		<Operations />
+		<Testimonials />
+		<Footer />
+	</div>
 </template>
 
 <script lang="ts">
