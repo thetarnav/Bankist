@@ -20,6 +20,11 @@
 	box-sizing: inherit;
 }
 
+a,
+button {
+	cursor: pointer;
+}
+
 html {
 	font-size: 62.5%;
 	box-sizing: border-box;
@@ -163,7 +168,7 @@ img {
 	margin-left: 4rem;
 }
 
-.nav__link:link,
+.nav__link,
 .nav__link:visited {
 	font-size: 1.7rem;
 	font-weight: 400;
@@ -173,7 +178,7 @@ img {
 	transition: all 0.3s;
 }
 
-.nav__link--btn:link,
+.nav__link--btn,
 .nav__link--btn:visited {
 	padding: 0.8rem 2.5rem;
 	border-radius: 3rem;

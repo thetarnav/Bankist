@@ -3,22 +3,43 @@
 		<nav class="nav" ref="nav">
 			<img
 				id="logo"
+				v-scroll-to="0"
 				src="img/logo.png"
 				alt="Bankist logo"
 				class="nav__logo"
+				:class="{ hide: true, 'is-hidden': hide }"
 			/>
 			<ul class="nav__links">
 				<li class="nav__item">
-					<a class="nav__link" href="#section--1">Features</a>
+					<a
+						v-scroll-to="'#section--1'"
+						class="nav__link"
+						:class="{ hide: true, 'is-hidden': hide }"
+						>Features</a
+					>
 				</li>
 				<li class="nav__item">
-					<a class="nav__link" href="#section--2">Operations</a>
+					<a
+						v-scroll-to="'#section--2'"
+						class="nav__link"
+						href="#section--2"
+						:class="{ hide: true, 'is-hidden': hide }"
+						>Operations</a
+					>
 				</li>
 				<li class="nav__item">
-					<a class="nav__link" href="#section--3">Testimonials</a>
+					<a
+						v-scroll-to
+						class="nav__link"
+						href="#section--3"
+						:class="{ hide: true, 'is-hidden': hide }"
+						>Testimonials</a
+					>
 				</li>
 				<li class="nav__item">
-					<a class="nav__link nav__link--btn btn--show-modal" href="#"
+					<a
+						class="nav__link nav__link--btn btn--show-modal"
+						:class="{ hide: true, 'is-hidden': hide }"
 						>Open account</a
 					>
 				</li>
@@ -30,7 +51,6 @@
 
 <script lang="ts">
 import Vue from 'vue'
-// import debounce from 'lodash.debounce'
 const debounce = require('lodash.debounce')
 
 export default Vue.extend({
@@ -38,10 +58,17 @@ export default Vue.extend({
 	data() {
 		return {
 			debouncedHandler: null,
+			hide: false,
 		}
 	},
 	created() {
 		this.debouncedHandler = debounce(this.handleScroll, 100)
+	},
+	mounted() {
+		this.$el.querySelectorAll('.hide').forEach(el => {
+			el.addEventListener('mouseenter', () => (this.hide = true))
+			el.addEventListener('mouseleave', () => (this.hide = false))
+		})
 	},
 	methods: {
 		handleScroll(): void {
@@ -60,5 +87,10 @@ export default Vue.extend({
 	position: fixed;
 	top: 50%;
 	left: 50%;
+}
+.is-hidden {
+	&:not(:hover) {
+		opacity: 0.6;
+	}
 }
 </style>
