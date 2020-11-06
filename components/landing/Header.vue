@@ -9,7 +9,7 @@
 				<span class="highlight">minimalist</span>
 			</h1>
 			<h4>A simpler banking experience for a simpler life.</h4>
-			<button class="btn--text btn--scroll-to">
+			<button v-scroll-to="'#section--1'" class="btn--text btn--scroll-to">
 				Learn more &DownArrow;
 			</button>
 			<img

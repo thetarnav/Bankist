@@ -55,9 +55,6 @@ const debounce = require('lodash.debounce')
 
 export default Vue.extend({
 	name: 'Nav',
-	// $refs: {
-
-	// },
 	data() {
 		return {
 			debouncedHandler: null,
