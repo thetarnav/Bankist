@@ -1,5 +1,9 @@
 <template>
-	<section class="section" id="section--1">
+	<section
+		id="section--1"
+		v-class-in-view.remove="'section--hidden'"
+		class="section"
+	>
 		<div class="section__title">
 			<h2 class="section__description">Features</h2>
 			<h3 class="section__header">

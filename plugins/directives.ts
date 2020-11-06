@@ -36,6 +36,9 @@ Vue.directive('class-in-view', {
 		const method = binding.modifiers.remove ? 'remove' : 'add',
 			debouncedHandler = debounce(handler, 100)
 
+		if (method === 'remove' && !el.classList.contains(className))
+			el.classList.add(className)
+
 		window.addEventListener('scroll', debouncedHandler)
 		handler()
 
