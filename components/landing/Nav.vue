@@ -44,7 +44,7 @@ export default Vue.extend({
 		this.debouncedHandler = debounce(this.handleScroll, 100)
 	},
 	methods: {
-		handleScroll(e: Event): void {
+		handleScroll(): void {
 			const el = this.$refs.nav,
 				{ height } = el.getBoundingClientRect()
 
