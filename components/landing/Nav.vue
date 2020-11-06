@@ -55,6 +55,9 @@ const debounce = require('lodash.debounce')
 
 export default Vue.extend({
 	name: 'Nav',
+	// $refs: {
+
+	// },
 	data() {
 		return {
 			debouncedHandler: null,
@@ -72,7 +75,7 @@ export default Vue.extend({
 	},
 	methods: {
 		handleScroll(): void {
-			const el = this.$refs.nav,
+			const el: any = this.$refs.nav,
 				{ height } = el.getBoundingClientRect()
 
 			if (window.scrollY > height) el.classList.add('sticky')
