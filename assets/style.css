@@ -455,13 +455,15 @@ h4 {
 
 .dots {
 	position: absolute;
-	bottom: 5%;
-	left: 50%;
+	bottom: 5% !important;
+	left: 50% !important;
+	width: auto !important;
 	transform: translateX(-50%);
 	display: flex;
 }
 
-.dots__dot {
+.dots__dot,
+.swiper-pagination-bullet {
 	border: none;
 	background-color: #b9b9b9;
 	opacity: 0.7;
@@ -476,11 +478,13 @@ h4 {
 	/* box-shadow: 0 0.6rem 1.5rem rgba(0, 0, 0, 0.7); */
 }
 
-.dots__dot:last-child {
+.dots__dot:last-child,
+.swiper-pagination-bullet:last-child {
 	margin: 0;
 }
 
-.dots__dot--active {
+.dots__dot--active,
+.swiper-pagination-bullet-active {
 	/* background-color: #fff; */
 	background-color: #888;
 	opacity: 1;
