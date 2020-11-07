@@ -40,6 +40,7 @@
 					<a
 						class="nav__link nav__link--btn btn--show-modal"
 						:class="{ hide: true, 'is-hidden': hide }"
+						@click="$root.$emit('toggleLogin')"
 						>Open account</a
 					>
 				</li>
