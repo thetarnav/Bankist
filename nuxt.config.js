@@ -21,6 +21,15 @@ export default {
 					'https://fonts.googleapis.com/css?family=Poppins:300,400,500,600&display=swap',
 			},
 		],
+		script: [
+			{ src: 'https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js' },
+			{
+				src:
+					'https://www.gstatic.com/firebasejs/8.0.1/firebase-analytics.js',
+				async: true,
+				defer: true,
+			},
+		],
 	},
 
 	// Global CSS (https://go.nuxtjs.dev/config-css)
