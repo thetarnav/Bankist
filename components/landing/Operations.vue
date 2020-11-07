@@ -14,20 +14,31 @@
 		<div class="operations">
 			<div class="operations__tab-container">
 				<button
-					class="btn operations__tab operations__tab--1 operations__tab--active"
-					data-tab="1"
+					class="btn operations__tab operations__tab--1"
+					:class="{ 'operations__tab--active': active === 0 }"
+					@click="makeActive(0)"
 				>
 					<span>01</span>Instant Transfers
 				</button>
-				<button class="btn operations__tab operations__tab--2" data-tab="2">
+				<button
+					class="btn operations__tab operations__tab--2"
+					:class="{ 'operations__tab--active': active === 1 }"
+					@click="makeActive(1)"
+				>
 					<span>02</span>Instant Loans
 				</button>
-				<button class="btn operations__tab operations__tab--3" data-tab="3">
+				<button
+					class="btn operations__tab operations__tab--3"
+					:class="{ 'operations__tab--active': active === 2 }"
+					@click="makeActive(2)"
+				>
 					<span>03</span>Instant Closing
 				</button>
 			</div>
+
 			<div
-				class="operations__content operations__content--1 operations__content--active"
+				class="operations__content operations__content--1"
+				:class="{ 'operations__content--active': active === 0 }"
 			>
 				<div class="operations__icon operations__icon--1">
 					<svg>
@@ -44,8 +55,10 @@
 					nisi ut aliquip ex ea commodo consequat.
 				</p>
 			</div>
-
-			<div class="operations__content operations__content--2">
+			<div
+				class="operations__content operations__content--2"
+				:class="{ 'operations__content--active': active === 1 }"
+			>
 				<div class="operations__icon operations__icon--2">
 					<svg>
 						<use xlink:href="img/icons.svg#icon-home"></use>
@@ -61,7 +74,10 @@
 					anim id est laborum.
 				</p>
 			</div>
-			<div class="operations__content operations__content--3">
+			<div
+				class="operations__content operations__content--3"
+				:class="{ 'operations__content--active': active === 2 }"
+			>
 				<div class="operations__icon operations__icon--3">
 					<svg>
 						<use xlink:href="img/icons.svg#icon-user-x"></use>
@@ -80,3 +96,20 @@
 		</div>
 	</section>
 </template>
+
+<script lang="ts">
+import Vue from 'vue'
+export default Vue.extend({
+	name: 'Operations',
+	data() {
+		return {
+			active: 0,
+		}
+	},
+	methods: {
+		makeActive(i: number) {
+			this.active = i
+		},
+	},
+})
+</script>
