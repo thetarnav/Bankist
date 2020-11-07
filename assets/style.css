@@ -588,6 +588,11 @@ h4 {
 
 .footer__item {
 	margin-right: 4rem;
+	transition: opacity 0.3s;
+}
+
+.is-hidden .footer__item:not(:hover) {
+	opacity: 0.6;
 }
 
 .footer__link {

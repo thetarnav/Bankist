@@ -2,8 +2,8 @@ import Vue from 'vue'
 const debounce = require('lodash.debounce')
 
 Vue.directive('scroll-to', {
-	inserted(el: HTMLElement, binding): void {
-		const target: string | number = binding?.value ?? el.hash
+	inserted(el: HTMLAnchorElement | HTMLElement, binding): void {
+		const target: string | number = binding?.value ?? el.hash ?? undefined
 		if (target === undefined) return
 
 		let targetEl: HTMLElement | null, top: number
