@@ -13,7 +13,10 @@
   "dependencies": {
     "@nuxt/typescript-runtime": "^2.0.0",
     "@nuxtjs/axios": "^5.12.2",
+    "@nuxtjs/dotenv": "^1.4.1",
+    "@nuxtjs/firebase": "^7.1.0",
     "@types/lodash.debounce": "^4.0.6",
+    "check-password-strength": "^1.0.15",
     "core-js": "^3.6.5",
     "firebase": "^8.0.1",
     "firebase-tools": "^8.15.1",

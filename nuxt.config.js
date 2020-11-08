@@ -21,15 +21,14 @@ export default {
 					'https://fonts.googleapis.com/css?family=Poppins:300,400,500,600&display=swap',
 			},
 		],
-		script: [
-			{ src: 'https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js' },
-			{
-				src:
-					'https://www.gstatic.com/firebasejs/8.0.1/firebase-analytics.js',
-				async: true,
-				defer: true,
-			},
-		],
+		// script: [
+		// 	{
+		// 		src:
+		// 			'https://www.gstatic.com/firebasejs/8.0.1/firebase-analytics.js',
+		// 		async: true,
+		// 		defer: true,
+		// 	},
+		// ],
 	},
 
 	// Global CSS (https://go.nuxtjs.dev/config-css)
@@ -45,13 +44,41 @@ export default {
 	buildModules: [
 		// https://go.nuxtjs.dev/typescript
 		'@nuxt/typescript-build',
+		'@nuxtjs/dotenv',
 	],
 
 	// Modules (https://go.nuxtjs.dev/config-modules)
 	modules: [
 		// https://go.nuxtjs.dev/axios
 		'@nuxtjs/axios',
+		'@nuxtjs/firebase',
 	],
+
+	firebase: {
+		config: {
+			apiKey: process.env.FIREBASE_KEY,
+			authDomain: `${process.env.FIREBASE_PROJECT}.firebaseapp.com`,
+			databaseURL: `https://${process.env.FIREBASE_PROJECT}.firebaseio.com`,
+			projectId: process.env.FIREBASE_PROJECT,
+			storageBucket: `${process.env.FIREBASE_PROJECT}.appspot.com`,
+			messagingSenderId: process.env.FIREBASE_SENDER,
+			appId: process.env.FIREBASE_ID,
+			measurementId: 'G-04WT9WBS76',
+		},
+		services: {
+			auth: true,
+			firestore: true,
+			functions: true,
+		},
+		onFirebaseHosting: true,
+		// lazy: true,
+	},
+
+	auth: {
+		initialize: {
+			onAuthStateChangedAction: 'onAuthStateChanged',
+		},
+	},
 
 	// Axios module configuration (https://go.nuxtjs.dev/config-axios)
 	axios: {},

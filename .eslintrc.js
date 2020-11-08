@@ -75,5 +75,6 @@ module.exports = {
 		'vue/no-side-effects-in-computed-properties': 'warn',
 		'no-unreachable': 'warn',
 		'prettier/prettier': 'off',
+		'no-useless-escape': 'warn',
 	},
 }
