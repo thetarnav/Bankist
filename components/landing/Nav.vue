@@ -1,6 +1,6 @@
 <template>
 	<div class="nav-wrapper">
-		<nav class="nav" ref="nav">
+		<nav ref="nav" class="nav">
 			<img
 				id="logo"
 				v-scroll-to="0"
@@ -40,7 +40,7 @@
 					<a
 						class="nav__link nav__link--btn btn--show-modal"
 						:class="{ hide: true, 'is-hidden': hide }"
-						@click="$root.$emit('toggleLogin')"
+						@click="$root.$emit('toggleSignUp')"
 						>Open account</a
 					>
 				</li>

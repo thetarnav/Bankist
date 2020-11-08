@@ -4,19 +4,18 @@
 			<button class="btn--close-modal" @click="$root.$emit('toggleLogin')">
 				&times;
 			</button>
-			<h2 class="modal__header">
-				Open your bank account <br />
-				in just <span class="highlight">5 minutes</span>
-			</h2>
+			<h2 class="modal__header">Login to your account</h2>
 			<form class="modal__form">
-				<label>First Name</label>
-				<input type="text" />
-				<label>Last Name</label>
-				<input type="text" />
 				<label>Email Address</label>
 				<input type="email" />
-				<button class="btn">Next step &rarr;</button>
+				<label>Password</label>
+				<input type="password" />
+				<button class="btn">Login &rarr;</button>
 			</form>
+			<p class="go-to-sign-up">
+				You don't have an account?
+				<a @click="goToLogin">Open one in a few seconds!</a>
+			</p>
 		</div>
 	</div>
 </template>
@@ -37,5 +36,13 @@ export default Vue.extend({
 	right: 0;
 	bottom: 0;
 	background-color: rgba(black, 0.5);
+}
+.go-to-sign-up {
+	font-size: 1.2rem;
+	margin-top: 2rem;
+	a {
+		font-weight: 600;
+		color: var(--color-primary, green);
+	}
 }
 </style>
