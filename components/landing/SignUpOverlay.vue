@@ -38,14 +38,17 @@
 		:fields="[
 			{ name: 'name', label: 'Your name' },
 			'lastName',
+			{ name: 'email', label: 'Email:', type: 'email', required: true },
 			{
 				name: 'password',
 				label: 'New passport:',
 				type: 'password',
 				required: true,
 				showStrength: true,
+				validate: true,
 			},
 		]"
+		@submit="formSubmit"
 	>
 		<template v-slot:title>
 			Open your bank account <br />
@@ -64,6 +67,10 @@
 import Vue from 'vue'
 import { validateEmail } from '~/plugins/utilities.ts'
 const passwordStrength = require('check-password-strength')
+
+interface FormValues {
+	[name: string]: string
+}
 
 export default Vue.extend({
 	name: 'SignUpOverlay',
@@ -90,6 +97,9 @@ export default Vue.extend({
 		},
 	},
 	methods: {
+		formSubmit(formValues: FormValues) {
+			console.log(formValues)
+		},
 		checkForm() {
 			const { password, email } = this
 			if (!password || !email)

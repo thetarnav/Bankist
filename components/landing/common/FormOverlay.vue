@@ -7,7 +7,7 @@
 			<h2 class="modal__header">
 				<slot name="title"></slot>
 			</h2>
-			<form class="modal__form">
+			<form class="modal__form" @submit.prevent="submit">
 				<template v-for="(field, index) in getFields">
 					<label :key="`${field.name}-label`">{{ field.label }}</label>
 					<div :key="`${field.name}-input`">
@@ -28,6 +28,9 @@
 			<p v-if="message" class="message">
 				{{ message }}
 			</p>
+			<p v-if="error" class="message">
+				{{ error }}
+			</p>
 			<footer>
 				<slot name="footer"> </slot>
 			</footer>
@@ -37,7 +40,7 @@
 
 <script lang="ts">
 import Vue, { PropType } from 'vue'
-
+import { validateEmail } from '~/plugins/utilities.ts'
 const checkPasswordStrength = require('check-password-strength')
 
 interface Field {
@@ -47,8 +50,13 @@ interface Field {
 	type?: string
 	required?: boolean
 	showStrength?: boolean
+	validate?: boolean
 }
-interface InputFields extends Array<Field | String> {}
+interface InputFields extends Array<Field | string> {}
+interface FormValues {
+	[name: string]: string
+}
+type Strength = 'Weak' | 'Medium' | 'Strong' | ''
 
 export default Vue.extend({
 	name: 'FormOverlay',
@@ -57,15 +65,15 @@ export default Vue.extend({
 			type: Array as PropType<InputFields>,
 			default: [],
 		},
+		message: {
+			type: String,
+			default: '',
+		},
 	},
 	data() {
 		return {
-			name: '',
-			lastName: '',
-			email: '',
-			password: '',
-			message: '',
-			form: [] as String[],
+			form: [] as string[],
+			error: '',
 		}
 	},
 	computed: {
@@ -74,15 +82,55 @@ export default Vue.extend({
 				typeof field === 'string' ? { name: field } : (field as Field),
 			)
 		},
+		formValues(): FormValues {
+			const formValues: FormValues = {}
+			this.getFields.forEach(
+				(field, i) => (formValues[field.name] = this.form[i]),
+			)
+			return formValues
+		},
 	},
 	methods: {
-		passStrength(i: number): string {
+		passStrength(i: number): Strength {
 			const password = this.form[i] ?? ''
-			let strength: string = ''
+			let strength: Strength = ''
 			if (password.length > 0)
 				strength = checkPasswordStrength(password).value
 			if (strength === 'Weak' && password.length > 10) strength = 'Medium'
 			return strength
+		},
+		validate(): boolean {
+			let isValid = true
+			for (let i = 0; i < this.getFields.length; i++) {
+				const field = this.getFields[i],
+					value = this.formValues[field.name]
+
+				if (field.required && value.length === 0) {
+					this.error = 'Email and password are required.'
+				} else if (
+					field.type === 'email' &&
+					field.validate &&
+					!validateEmail(value)
+				)
+					this.error = `${value} is not a valid email!`
+				else if (
+					field.type === 'password' &&
+					field.validate &&
+					['', 'Weak'].includes(this.passStrength(i))
+				)
+					this.error = 'Please enter stronger password.'
+				else {
+					this.error = ''
+					continue
+				}
+				isValid = false
+				break
+			}
+			return isValid
+		},
+		submit() {
+			if (!this.validate()) return
+			this.$emit('submit', this.formValues)
 		},
 	},
 })
