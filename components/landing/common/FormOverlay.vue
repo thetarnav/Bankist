@@ -1,15 +1,29 @@
 <template>
-	<!-- <div class="background-cover">
+	<div class="form-overlay background-cover">
 		<div class="modal">
 			<button class="btn--close-modal" @click="$root.$emit('toggleSignUp')">
 				&times;
 			</button>
 			<h2 class="modal__header">
-				Open your bank account <br />
-				in just <span class="highlight">5 minutes</span>
+				<slot name="title"></slot>
 			</h2>
-			<form class="modal__form" @submit.prevent="checkForm">
-				<label>First Name</label>
+			<form class="modal__form">
+				<template v-for="(field, index) in getFields">
+					<label :key="`${field.name}-label`">{{ field.label }}</label>
+					<div :key="`${field.name}-input`">
+						<input
+							v-model.trim="form[index]"
+							:type="field.type || 'text'"
+							:required="field.required"
+						/>
+						<div
+							v-if="field.showStrength"
+							class="strength"
+							:class="passwordStrength(index)"
+						></div>
+					</div>
+				</template>
+				<!-- <label>First Name</label>
 				<input v-model.trim="name" type="text" />
 				<label>Last Name</label>
 				<input v-model.trim="lastName" type="text" />
@@ -22,7 +36,7 @@
 						class="strength"
 						:class="{ [passwordStrength]: password.length > 0 }"
 					></div>
-				</div>
+				</div> -->
 				<button class="btn">Sign Up &rarr;</button>
 			</form>
 			<p v-if="message" class="message">
@@ -30,37 +44,35 @@
 			</p>
 			<p class="go-to-login">
 				Already have an account?
-				<a @click="switchLoginOverlay">Go to login</a>
+				<a>Go to login</a>
 			</p>
 		</div>
-	</div> -->
-	<FormOverlay
-		:fields="[
-			{ name: 'name', label: 'Your name' },
-			'lastName',
-			{
-				name: 'password',
-				label: 'New passport:',
-				type: 'password',
-				required: true,
-				showStrength: true,
-			},
-		]"
-	>
-		<title>
-			Open your bank account <br /> in just <span class="highlight">5
-			minutes</span>
-		</title>
-	</FormOverlay>
+	</div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import { validateEmail } from '~/plugins/utilities.ts'
+import Vue, { PropType } from 'vue'
+
 const passwordStrength = require('check-password-strength')
 
+interface Field {
+	name: string
+	label?: string
+	placeholder?: string
+	type?: string
+	required?: boolean
+	showStrength?: boolean
+}
+interface InputFields extends Array<Field | String> {}
+
 export default Vue.extend({
-	name: 'SignUpOverlay',
+	name: 'FormOverlay',
+	props: {
+		fields: {
+			type: Array as PropType<InputFields>,
+			default: [],
+		},
+	},
 	data() {
 		return {
 			name: '',
@@ -68,38 +80,23 @@ export default Vue.extend({
 			email: '',
 			password: '',
 			message: '',
-			passwordStrength: 'Weak',
+			form: [] as String[],
 		}
 	},
-	watch: {
-		password() {
-			if (!this.password) this.passwordStrength = 'Weak'
-			else {
-				let strength = passwordStrength(this.password).value
-				if (strength === 'Weak')
-					strength = this.password.length > 10 ? 'Medium' : 'Weak'
-
-				this.passwordStrength = strength
-			}
+	computed: {
+		getFields(): Field[] {
+			return this.fields.map(field =>
+				typeof field === 'string' ? { name: field } : (field as Field),
+			)
 		},
 	},
 	methods: {
-		checkForm() {
-			const { password, email } = this
-			if (!password || !email)
-				this.message = 'Email and password are required.'
-			else if (!validateEmail(email))
-				this.message = `${email} is not a valid email!`
-			else if (this.passwordStrength === 'Weak')
-				this.message = 'Please enter stronger password.'
-			else {
-				this.message = ''
-				console.log(email)
-			}
-		},
-		switchLoginOverlay() {
-			this.$root.$emit('toggleSignUp')
-			this.$root.$emit('toggleLogin')
+		passwordStrength(i: number): string {
+			const password = this.form[i] ?? ''
+			let strength: string = ''
+			if (password.length > 0) strength = passwordStrength(password).value
+			if (strength === 'Weak' && password.length > 10) strength = 'Medium'
+			return strength
 		},
 	},
 })
