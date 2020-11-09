@@ -23,29 +23,14 @@
 						></div>
 					</div>
 				</template>
-				<!-- <label>First Name</label>
-				<input v-model.trim="name" type="text" />
-				<label>Last Name</label>
-				<input v-model.trim="lastName" type="text" />
-				<label>Email Address</label>
-				<input v-model.trim="email" type="email" required />
-				<label>Password</label>
-				<div class="password">
-					<input v-model.trim="password" type="password" required />
-					<div
-						class="strength"
-						:class="{ [passwordStrength]: password.length > 0 }"
-					></div>
-				</div> -->
 				<button class="btn">Sign Up &rarr;</button>
 			</form>
 			<p v-if="message" class="message">
 				{{ message }}
 			</p>
-			<p class="go-to-login">
-				Already have an account?
-				<a>Go to login</a>
-			</p>
+			<footer>
+				<slot name="footer"> </slot>
+			</footer>
 		</div>
 	</div>
 </template>
@@ -115,8 +100,11 @@ export default Vue.extend({
 .modal__form {
 	margin-bottom: 2rem;
 }
-.go-to-login {
-	font-size: 1.2rem;
+
+footer {
+	p {
+		font-size: 1.2rem;
+	}
 	a {
 		font-weight: 600;
 		color: var(--color-primary, green);

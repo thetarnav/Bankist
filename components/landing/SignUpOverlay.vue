@@ -47,10 +47,16 @@
 			},
 		]"
 	>
-		<title>
-			Open your bank account <br /> in just <span class="highlight">5
-			minutes</span>
-		</title>
+		<template v-slot:title>
+			Open your bank account <br />
+			in just <span class="highlight">5 minutes</span>
+		</template>
+		<template v-slot:footer
+			><p>
+				Already have an account?
+				<a @click="switchLoginOverlay">Go to login</a>
+			</p>
+		</template>
 	</FormOverlay>
 </template>
 
