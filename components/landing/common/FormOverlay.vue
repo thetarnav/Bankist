@@ -19,7 +19,7 @@
 						<div
 							v-if="field.showStrength"
 							class="strength"
-							:class="passwordStrength(index)"
+							:class="passStrength(index)"
 						></div>
 					</div>
 				</template>
@@ -38,7 +38,7 @@
 <script lang="ts">
 import Vue, { PropType } from 'vue'
 
-const passwordStrength = require('check-password-strength')
+const checkPasswordStrength = require('check-password-strength')
 
 interface Field {
 	name: string
@@ -76,10 +76,11 @@ export default Vue.extend({
 		},
 	},
 	methods: {
-		passwordStrength(i: number): string {
+		passStrength(i: number): string {
 			const password = this.form[i] ?? ''
 			let strength: string = ''
-			if (password.length > 0) strength = passwordStrength(password).value
+			if (password.length > 0)
+				strength = checkPasswordStrength(password).value
 			if (strength === 'Weak' && password.length > 10) strength = 'Medium'
 			return strength
 		},
