@@ -1,7 +1,7 @@
 <template>
 	<div class="form-overlay background-cover">
 		<div class="modal">
-			<button class="btn--close-modal" @click="$root.$emit('toggleSignUp')">
+			<button class="btn--close-modal" @click="$emit('close')">
 				&times;
 			</button>
 			<h2 class="modal__header">
@@ -9,7 +9,7 @@
 			</h2>
 			<form class="modal__form" @submit.prevent="submit">
 				<template v-for="(field, index) in getFields">
-					<label :key="`${field.name}-label`">{{ field.label }}</label>
+					<label :key="`${field.name}-label`">{{ label(field) }}</label>
 					<div :key="`${field.name}-input`">
 						<input
 							v-model.trim="form[index]"
@@ -23,7 +23,7 @@
 						></div>
 					</div>
 				</template>
-				<button class="btn">Sign Up &rarr;</button>
+				<button class="btn">{{ submitLabel }}</button>
 			</form>
 			<p v-if="message" class="message">
 				{{ message }}
@@ -40,7 +40,7 @@
 
 <script lang="ts">
 import Vue, { PropType } from 'vue'
-import { validateEmail } from '~/plugins/utilities.ts'
+import { validateEmail, camelToLabel } from '~/plugins/utilities.ts'
 const checkPasswordStrength = require('check-password-strength')
 
 interface Field {
@@ -53,7 +53,7 @@ interface Field {
 	validate?: boolean
 }
 interface InputFields extends Array<Field | string> {}
-interface FormValues {
+export interface FormValues {
 	[name: string]: string
 }
 type Strength = 'Weak' | 'Medium' | 'Strong' | ''
@@ -63,11 +63,15 @@ export default Vue.extend({
 	props: {
 		fields: {
 			type: Array as PropType<InputFields>,
-			default: [],
+			required: true,
 		},
 		message: {
 			type: String,
 			default: '',
+		},
+		submitLabel: {
+			type: String,
+			default: 'Send →',
 		},
 	},
 	data() {
@@ -88,6 +92,11 @@ export default Vue.extend({
 				(field, i) => (formValues[field.name] = this.form[i]),
 			)
 			return formValues
+		},
+	},
+	watch: {
+		form() {
+			this.$emit('input', this.formValues)
 		},
 	},
 	methods: {
@@ -131,6 +140,9 @@ export default Vue.extend({
 		submit() {
 			if (!this.validate()) return
 			this.$emit('submit', this.formValues)
+		},
+		label(field: Field): string {
+			return field.label ?? camelToLabel(field.name ?? '')
 		},
 	},
 })
