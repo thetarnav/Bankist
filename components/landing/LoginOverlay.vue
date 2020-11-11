@@ -15,8 +15,8 @@
 			},
 		]"
 		submit-label="Login →"
+		:message="message"
 		@submit="formSubmit"
-		@input="logInput"
 		@close="$root.$emit('toggleLogin')"
 	>
 		<template v-slot:title>
@@ -34,17 +34,29 @@
 <script lang="ts">
 import Vue from 'vue'
 import { FormValues } from '~/components/common/FormOverlay.vue'
+
 export default Vue.extend({
 	name: 'LoginOverlay',
 	data() {
-		return {}
+		return { message: '' }
 	},
 	methods: {
-		logInput(formValues: FormValues) {
-			console.log(formValues)
-		},
-		formSubmit(formValues: FormValues) {
-			console.log(formValues)
+		async formSubmit(formValues: FormValues) {
+			const { password, email } = formValues,
+				{ auth, firestore } = this.$fire
+			this.message = ''
+
+			try {
+				await auth.signInWithEmailAndPassword(email, password)
+			} catch (error) {
+				this.message = error.message
+				return
+			}
+			if (auth.currentUser === null) {
+				this.message = "Couldn't log in... Try again in a few minutes."
+				return
+			}
+			this.$router.push({ path: '/dashboard' })
 		},
 		switchLoginOverlay() {
 			this.$root.$emit('toggleSignUp')

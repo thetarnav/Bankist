@@ -1,13 +1,21 @@
 export const state = () => ({
-	email: '',
-	userID: null,
+	user: null,
 })
 
-export const mutations = {}
+export const mutations = {
+	SET_USER: (state, user) => {
+		if (!user) {
+			state.user = null
+		} else {
+			const { uid, email } = user
+			state.user = { uid, email }
+		}
+	},
+}
 
 export const actions = {
-	onAuthStateChanged({ state }, authPayload) {
-		console.log(authPayload)
+	onAuthStateChanged({ state, commit }, { authUser }) {
+		commit('SET_USER', authUser)
 	},
 }
 

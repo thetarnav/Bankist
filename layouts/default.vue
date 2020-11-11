@@ -4,7 +4,7 @@
 		<Nuxt />
 		<Footer />
 		<LoginOverlay v-if="showLogin" />
-		<SignUpOverlay v-if="showSignUp" />
+		<SignUpOverlay v-else-if="showSignUp" />
 	</div>
 </template>
 

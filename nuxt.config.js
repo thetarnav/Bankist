@@ -66,18 +66,16 @@ export default {
 			measurementId: 'G-04WT9WBS76',
 		},
 		services: {
-			auth: true,
+			auth: {
+				initialize: {
+					onAuthStateChangedAction: 'onAuthStateChanged',
+				},
+			},
 			firestore: true,
 			functions: true,
 		},
 		onFirebaseHosting: true,
 		// lazy: true,
-	},
-
-	auth: {
-		initialize: {
-			onAuthStateChangedAction: 'onAuthStateChanged',
-		},
 	},
 
 	// Axios module configuration (https://go.nuxtjs.dev/config-axios)

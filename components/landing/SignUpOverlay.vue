@@ -77,6 +77,7 @@ export default Vue.extend({
 			}
 
 			window.localStorage.setItem('signedBefore', 'true')
+			this.$router.push({ path: '/dashboard' })
 		},
 		switchLoginOverlay() {
 			this.$root.$emit('toggleSignUp')
