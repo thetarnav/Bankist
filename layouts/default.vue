@@ -22,6 +22,9 @@ export default Vue.extend({
 		this.$root.$on('toggleLogin', () => (this.showLogin = !this.showLogin))
 		this.$root.$on('toggleSignUp', () => (this.showSignUp = !this.showSignUp))
 	},
+	head: {
+		link: [{ rel: 'stylesheet', href: '/css/home.css' }],
+	},
 })
 </script>
 
