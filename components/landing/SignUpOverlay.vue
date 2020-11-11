@@ -14,9 +14,9 @@
 			},
 		]"
 		submit-label="Sing up →"
+		:message="message"
 		@submit="formSubmit"
 		@close="$root.$emit('toggleSignUp')"
-		:message="message"
 	>
 		<template v-slot:title>
 			Open your bank account <br />
@@ -75,6 +75,8 @@ export default Vue.extend({
 				this.$fire.functions.httpsCallable('deleteUser')(uid)
 				return
 			}
+
+			window.localStorage.setItem('signedBefore', 'true')
 		},
 		switchLoginOverlay() {
 			this.$root.$emit('toggleSignUp')

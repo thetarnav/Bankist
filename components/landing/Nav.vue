@@ -38,10 +38,18 @@
 				</li>
 				<li class="nav__item">
 					<a
+						v-if="!signedBefore"
 						class="nav__link nav__link--btn btn--show-modal"
 						:class="{ hide: true, 'is-hidden': hide }"
 						@click="$root.$emit('toggleSignUp')"
 						>Open account</a
+					>
+					<a
+						v-else
+						class="nav__link nav__link--btn btn--show-modal"
+						:class="{ hide: true, 'is-hidden': hide }"
+						@click="$root.$emit('toggleLogin')"
+						>Login</a
 					>
 				</li>
 			</ul>
@@ -60,6 +68,7 @@ export default Vue.extend({
 		return {
 			debouncedHandler: null,
 			hide: false,
+			signedBefore: false,
 		}
 	},
 	created() {
@@ -70,6 +79,9 @@ export default Vue.extend({
 			el.addEventListener('mouseenter', () => (this.hide = true))
 			el.addEventListener('mouseleave', () => (this.hide = false))
 		})
+
+		const signedBefore = window.localStorage.getItem('signedBefore')
+		if (signedBefore) this.signedBefore = true
 	},
 	methods: {
 		handleScroll(): void {
