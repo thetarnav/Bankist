@@ -60,10 +60,11 @@ export default Vue.extend({
 			/**
 			 * CREATING FIRESTORE DOCUMENT
 			 */
+			const { uid } = auth.currentUser
 			try {
 				await firestore
 					.collection('users')
-					.doc(auth.currentUser.uid)
+					.doc(uid)
 					.set({
 						email,
 						name: formValues.name ?? null,
@@ -71,7 +72,7 @@ export default Vue.extend({
 					})
 			} catch (error) {
 				this.message = error.message
-
+				this.$fire.functions.httpsCallable('deleteUser')(uid)
 				return
 			}
 		},
