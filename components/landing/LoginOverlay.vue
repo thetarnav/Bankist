@@ -20,8 +20,7 @@
 		@close="$root.$emit('toggleLogin')"
 	>
 		<template v-slot:title>
-			Open your bank account <br />
-			in just <span class="highlight">5 minutes</span>
+			Login to <span class="highlight">your account</span>.
 		</template>
 		<template v-slot:footer
 			><p>

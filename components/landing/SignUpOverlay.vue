@@ -15,8 +15,8 @@
 		]"
 		submit-label="Sing up →"
 		@submit="formSubmit"
-		@input="logInput"
 		@close="$root.$emit('toggleSignUp')"
+		:message="message"
 	>
 		<template v-slot:title>
 			Open your bank account <br />
@@ -34,21 +34,46 @@
 <script lang="ts">
 import Vue from 'vue'
 import { FormValues } from '~/components/common/FormOverlay.vue'
-// interface FormValues {
-// 	[name: string]: string
-// }
 
 export default Vue.extend({
 	name: 'SignUpOverlay',
 	data() {
-		return {}
+		return { message: '' }
 	},
 	methods: {
-		logInput(formValues: FormValues) {
-			console.log(formValues)
-		},
-		formSubmit(formValues: FormValues) {
-			console.log(formValues)
+		async formSubmit(formValues: FormValues) {
+			const { password, email } = formValues,
+				{ auth, firestore } = this.$fire
+			this.message = ''
+
+			/**
+			 * CREATING USER
+			 */
+			try {
+				await auth.createUserWithEmailAndPassword(email, password)
+			} catch (error) {
+				this.message = error.message
+				return
+			}
+			if (auth.currentUser === null) return
+
+			/**
+			 * CREATING FIRESTORE DOCUMENT
+			 */
+			try {
+				await firestore
+					.collection('users')
+					.doc(auth.currentUser.uid)
+					.set({
+						email,
+						name: formValues.name ?? null,
+						lastName: formValues.lastName ?? null,
+					})
+			} catch (error) {
+				this.message = error.message
+
+				return
+			}
 		},
 		switchLoginOverlay() {
 			this.$root.$emit('toggleSignUp')

@@ -10,7 +10,7 @@
 			<form class="modal__form" @submit.prevent="submit">
 				<template v-for="(field, index) in getFields">
 					<label :key="`${field.name}-label`">{{ label(field) }}</label>
-					<div :key="`${field.name}-input`">
+					<div :key="`${field.name}-input`" class="input-wrapper">
 						<input
 							v-model.trim="form[index]"
 							:type="field.type || 'text'"
@@ -162,6 +162,10 @@ export default Vue.extend({
 	margin-bottom: 2rem;
 }
 
+.input-wrapper {
+	width: 100%;
+}
+
 footer {
 	p {
 		font-size: 1.2rem;
@@ -178,8 +182,7 @@ footer {
 	margin: 0 auto;
 }
 .strength {
-	width: calc(100% - 2rem);
-	margin: 0 1rem;
+	width: 100%;
 	height: 0.4rem;
 	grid-column: 2;
 	&.Weak {
