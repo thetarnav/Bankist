@@ -14,15 +14,15 @@
 		<div class="features">
 			<img
 				v-class-in-view.remove="'lazy-img'"
-				src="img/digital-lazy.jpg"
-				data-src="img/digital.jpg"
+				src="/img/digital-lazy.jpg"
+				data-src="/img/digital.jpg"
 				alt="Computer"
 				class="features__img lazy-img"
 			/>
 			<div class="features__feature">
 				<div class="features__icon">
 					<svg>
-						<use xlink:href="img/icons.svg#icon-monitor"></use>
+						<use xlink:href="/img/icons.svg#icon-monitor"></use>
 					</svg>
 				</div>
 				<h5 class="features__header">100% digital bank</h5>
@@ -36,7 +36,7 @@
 			<div class="features__feature">
 				<div class="features__icon">
 					<svg>
-						<use xlink:href="img/icons.svg#icon-trending-up"></use>
+						<use xlink:href="/img/icons.svg#icon-trending-up"></use>
 					</svg>
 				</div>
 				<h5 class="features__header">Watch your money grow</h5>
@@ -48,23 +48,23 @@
 			</div>
 			<img
 				v-class-in-view.remove="'lazy-img'"
-				src="img/grow-lazy.jpg"
-				data-src="img/grow.jpg"
+				src="/img/grow-lazy.jpg"
+				data-src="/img/grow.jpg"
 				alt="Plant"
 				class="features__img lazy-img"
 			/>
 
 			<img
 				v-class-in-view.remove="'lazy-img'"
-				src="img/card-lazy.jpg"
-				data-src="img/card.jpg"
+				src="/img/card-lazy.jpg"
+				data-src="/img/card.jpg"
 				alt="Credit card"
 				class="features__img lazy-img"
 			/>
 			<div class="features__feature">
 				<div class="features__icon">
 					<svg>
-						<use xlink:href="img/icons.svg#icon-credit-card"></use>
+						<use xlink:href="/img/icons.svg#icon-credit-card"></use>
 					</svg>
 				</div>
 				<h5 class="features__header">Free debit card included</h5>

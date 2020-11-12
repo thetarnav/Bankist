@@ -23,7 +23,7 @@
 				<a class="footer__link" href="#">Contact Us</a>
 			</li>
 		</ul>
-		<img src="img/icon.png" alt="Logo" class="footer__logo" />
+		<img src="/img/icon.png" alt="Logo" class="footer__logo" />
 		<p class="footer__copyright">
 			&copy; Copyright by
 			<a

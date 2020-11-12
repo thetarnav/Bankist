@@ -25,7 +25,9 @@
 		<template v-slot:footer
 			><p>
 				You don't have an account?
-				<a @click="switchLoginOverlay">Open one in a few seconds!</a>
+				<a @click="$root.$emit('toggleSignUp')"
+					>Open one in a few seconds!</a
+				>
 			</p>
 		</template>
 	</FormOverlay>
@@ -43,7 +45,7 @@ export default Vue.extend({
 	methods: {
 		async formSubmit(formValues: FormValues) {
 			const { password, email } = formValues,
-				{ auth, firestore } = this.$fire
+				{ auth } = this.$fire
 			this.message = ''
 
 			try {
@@ -56,6 +58,7 @@ export default Vue.extend({
 				this.message = "Couldn't log in... Try again in a few minutes."
 				return
 			}
+			this.$store.commit('SET_USER', auth.currentUser)
 			this.$router.push({ path: '/dashboard' })
 		},
 		switchLoginOverlay() {

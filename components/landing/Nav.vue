@@ -4,7 +4,7 @@
 			<img
 				id="logo"
 				v-scroll-to="0"
-				src="img/logo.png"
+				src="/img/logo.png"
 				alt="Bankist logo"
 				class="nav__logo"
 				:class="{ hide: true, 'is-hidden': hide }"

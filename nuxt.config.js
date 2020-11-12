@@ -15,7 +15,7 @@ export default {
 			{ 'http-equiv': 'X-UA-Compatible', content: 'ie=edge' },
 		],
 		link: [
-			{ rel: 'shortcut icon', type: 'image/png', href: 'img/icon.png' },
+			{ rel: 'shortcut icon', type: 'image/png', href: '/img/icon.png' },
 			{
 				rel: 'stylesheet',
 				href:

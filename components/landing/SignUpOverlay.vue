@@ -25,7 +25,7 @@
 		<template v-slot:footer
 			><p>
 				Already have an account?
-				<a @click="switchLoginOverlay">Go to login</a>
+				<a @click="$root.$emit('toggleLogin')">Go to login</a>
 			</p>
 		</template>
 	</FormOverlay>
@@ -77,6 +77,7 @@ export default Vue.extend({
 			}
 
 			window.localStorage.setItem('signedBefore', 'true')
+			this.$store.commit('SET_USER', auth.currentUser)
 			this.$router.push({ path: '/dashboard' })
 		},
 		switchLoginOverlay() {

@@ -13,7 +13,7 @@
 				Learn more &DownArrow;
 			</button>
 			<img
-				src="img/hero.png"
+				src="/img/hero.png"
 				class="header__img"
 				alt="Minimalist bank items"
 			/>

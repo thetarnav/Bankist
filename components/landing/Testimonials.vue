@@ -30,7 +30,7 @@
 						</blockquote>
 						<address class="testimonial__author">
 							<img
-								src="img/user-1.jpg"
+								src="/img/user-1.jpg"
 								alt=""
 								class="testimonial__photo"
 							/>
@@ -54,7 +54,7 @@
 						</blockquote>
 						<address class="testimonial__author">
 							<img
-								src="img/user-2.jpg"
+								src="/img/user-2.jpg"
 								alt=""
 								class="testimonial__photo"
 							/>
@@ -79,7 +79,7 @@
 						</blockquote>
 						<address class="testimonial__author">
 							<img
-								src="img/user-3.jpg"
+								src="/img/user-3.jpg"
 								alt=""
 								class="testimonial__photo"
 							/>

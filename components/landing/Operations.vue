@@ -42,7 +42,7 @@
 			>
 				<div class="operations__icon operations__icon--1">
 					<svg>
-						<use xlink:href="img/icons.svg#icon-upload"></use>
+						<use xlink:href="/img/icons.svg#icon-upload"></use>
 					</svg>
 				</div>
 				<h5 class="operations__header">
@@ -61,7 +61,7 @@
 			>
 				<div class="operations__icon operations__icon--2">
 					<svg>
-						<use xlink:href="img/icons.svg#icon-home"></use>
+						<use xlink:href="/img/icons.svg#icon-home"></use>
 					</svg>
 				</div>
 				<h5 class="operations__header">
@@ -80,7 +80,7 @@
 			>
 				<div class="operations__icon operations__icon--3">
 					<svg>
-						<use xlink:href="img/icons.svg#icon-user-x"></use>
+						<use xlink:href="/img/icons.svg#icon-user-x"></use>
 					</svg>
 				</div>
 				<h5 class="operations__header">

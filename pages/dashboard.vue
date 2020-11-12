@@ -7,6 +7,7 @@
 		<Loan />
 		<CloseAccount />
 		<Timer />
+		<a @click="logout">LOGOUT</a>
 	</div>
 </template>
 
@@ -24,17 +25,18 @@ export default Vue.extend({
 	methods: {
 		logout() {
 			this.$fire.auth.signOut()
-
 			this.$router.push({ path: '/' })
 		},
 	},
 	head: {
-		link: [{ rel: 'stylesheet', href: '/css/dashboard.css' }],
 		title: 'Account dashboard',
 	},
 	layout: 'empty',
+	middleware: 'auth',
 })
 </script>
+
+<style src="~/assets/dashboard.css"></style>
 
 <style lang="scss" scoped>
 .app.loaded {

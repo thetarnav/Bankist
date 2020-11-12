@@ -3,8 +3,8 @@
 		<Nav />
 		<Nuxt />
 		<Footer />
-		<LoginOverlay v-if="showLogin" />
-		<SignUpOverlay v-else-if="showSignUp" />
+		<LoginOverlay v-show="overlay === 'login'" />
+		<SignUpOverlay v-show="overlay === 'sign-up'" />
 	</div>
 </template>
 
@@ -12,20 +12,29 @@
 import Vue from 'vue'
 
 export default Vue.extend({
-	data() {
-		return {
-			showLogin: false,
-			showSignUp: false,
-		}
+	name: 'DefaultLayout',
+	computed: {
+		overlay(): string | null {
+			const { overlay } = this.$route.query
+			return typeof overlay === 'string' &&
+				['login', 'sign-up'].includes(overlay)
+				? overlay
+				: null
+		},
 	},
 	created() {
-		this.$root.$on('toggleLogin', () => (this.showLogin = !this.showLogin))
-		this.$root.$on('toggleSignUp', () => (this.showSignUp = !this.showSignUp))
+		this.$root.$on('toggleLogin', () => this.toggleOverlayQuery('login'))
+		this.$root.$on('toggleSignUp', () => this.toggleOverlayQuery('sign-up'))
 	},
-	head: {
-		link: [{ rel: 'stylesheet', href: '/css/home.css' }],
+	methods: {
+		toggleOverlayQuery(name: string) {
+			const overlayQuery = this.$route.query.overlay,
+				overlay = overlayQuery === name ? undefined : name
+
+			this.$router.push({ query: { overlay } })
+		},
 	},
 })
 </script>
 
-<style></style>
+<style src="~/assets/home.css"></style>
