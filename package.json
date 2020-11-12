@@ -19,7 +19,7 @@
     "check-password-strength": "^1.0.15",
     "core-js": "^3.7.0",
     "firebase": "^8.0.1",
-    "firebase-tools": "^8.15.1",
+    "firebase-tools": "^8.16.0",
     "lodash.debounce": "^4.0.8",
     "nuxt": "^2.14.6",
     "swiper": "^5.4.5",
