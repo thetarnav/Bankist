@@ -37,8 +37,15 @@
 					>
 				</li>
 				<li class="nav__item">
+					<nuxt-link
+						v-if="authUser"
+						to="/dashboard"
+						class="nav__link nav__link--btn btn--show-modal"
+						:class="{ hide: true, 'is-hidden': hide }"
+						>Your dashboard</nuxt-link
+					>
 					<a
-						v-if="!signedBefore"
+						v-else-if="!signedBefore"
 						class="nav__link nav__link--btn btn--show-modal"
 						:class="{ hide: true, 'is-hidden': hide }"
 						@click="$root.$emit('toggleSignUp')"
@@ -60,6 +67,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import { mapState } from 'vuex'
 const debounce = require('lodash.debounce')
 
 export default Vue.extend({
@@ -70,6 +78,9 @@ export default Vue.extend({
 			hide: false,
 			signedBefore: false,
 		}
+	},
+	computed: {
+		...mapState(['authUser']),
 	},
 	created() {
 		this.debouncedHandler = debounce(this.handleScroll, 100)
