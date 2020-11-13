@@ -1,14 +1,14 @@
 {
-  "name": "Bankist",
+  "name": "bankist",
   "version": "1.0.0",
-  "private": true,
+  "private": false,
+  "author": "Damian Tarnawski @thetarnav",
   "scripts": {
     "dev": "nuxt-ts",
     "build": "nuxt-ts build",
     "start": "nuxt-ts start",
     "generate": "nuxt-ts generate",
-    "lint:js": "eslint --ext .js,.vue --ignore-path .gitignore .",
-    "lint": "npm run lint:js"
+    "deploy": "firebase deploy --only hosting"
   },
   "dependencies": {
     "@nuxt/typescript-runtime": "^2.0.0",

@@ -19,5 +19,6 @@ export default Vue.extend({
 	head: {
 		title: 'Welcome to Bankist',
 	},
+	scrollToTop: false
 })
 </script>
