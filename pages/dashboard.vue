@@ -1,19 +1,24 @@
 <template>
-	<div ref="app" class="app">
-		<Balance />
-		<Movements />
-		<Summary />
-		<Transfer />
-		<Loan />
-		<CloseAccount />
-		<Timer />
-		<a @click="logout">LOGOUT</a>
+	<div>
+		<nav>
+			<p class="welcome">Welcome back, {{ userName }}</p>
+		</nav>
+		<main ref="app" class="app">
+			<Balance />
+			<Movements />
+			<Summary />
+			<Transfer />
+			<Loan />
+			<CloseAccount />
+			<Timer />
+			<a @click="logout">LOGOUT</a>
+		</main>
 	</div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapState } from 'vuex'
 
 export default Vue.extend({
 	/** Get data on Server Side: */
@@ -28,6 +33,7 @@ export default Vue.extend({
 		}
 	},
 	computed: {
+		...mapState(['userDocument']),
 		...mapGetters(['userName']),
 	},
 	/**  Bind Vuexfire on client-side: */

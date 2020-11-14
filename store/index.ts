@@ -8,8 +8,8 @@ interface AuthUser {
 interface UserDocument {
 	id: AuthUser['uid']
 	email: AuthUser['email']
-	name: string
-	lastName: string
+	name: string | null
+	lastName: string | null
 }
 
 /**
@@ -28,9 +28,19 @@ export const getters: GetterTree<RootState, RootState> = {
 	userName: ({ userDocument }) => {
 		if (!userDocument) return null
 		const { name, lastName, email } = userDocument
-		return (
-			((name || '') + lastName ? ` ${lastName}` : '') || email || 'anonymous'
-		)
+
+		let userName = 'anonymous'
+		if (name && lastName) userName = `${name} ${lastName}`
+		else if (name) userName = name
+		else if (lastName) userName = lastName
+		else if (email) userName = email
+
+		// return (
+		// 	((name || '') + lastName ? ` ${lastName}` : '') ||
+		// 	email ||
+		// 	'anonymous'
+		// ).trim()
+		return userName.trim()
 	},
 }
 
@@ -53,10 +63,12 @@ export const mutations: MutationTree<RootState> = {
  */
 export const actions: ActionTree<RootState, RootState> = {
 	onAuthStateChanged({ state, commit, dispatch }, { authUser }) {
-		if (!authUser) commit('SET_USER', null)
-		else if (authUser.uid !== state.authUser?.uid) {
+		if (authUser && authUser.uid !== state.authUser?.uid) {
 			commit('SET_USER', authUser)
 			dispatch('bindUserDocument')
+		} else if (!authUser) {
+			commit('SET_USER', null)
+			dispatch('unbindUserDocument')
 		}
 	},
 	getThis() {
