@@ -24,7 +24,8 @@
     "nuxt": "^2.14.6",
     "swiper": "^5.4.5",
     "vue-awesome-swiper": "^4.1.1",
-    "vue-global-events": "^1.2.1"
+    "vue-global-events": "^1.2.1",
+    "vuexfire": "^3.2.4"
   },
   "devDependencies": {
     "@nuxt/types": "^2.14.6",

@@ -4,6 +4,7 @@
 		"appspot",
 		"firebaseapp",
 		"maxlength",
-		"swiper"
+		"swiper",
+		"vuexfire"
 	]
 }

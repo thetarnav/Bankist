@@ -13,15 +13,33 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import { mapGetters } from 'vuex'
+
 export default Vue.extend({
-	computed: {
-		userName(): string {
-			return this.$fire.auth.currentUser?.displayName ?? 'not-found'
-		},
+	/** Get data on Server Side: */
+	async fetch({ app, store }) {
+		if (process.browser) return
+		try {
+			// Binds it on server side then unbind again to avoid memory leaks on the server.
+			await store.dispatch('bindUserDocument')
+			store.dispatch('unbindUserDocument')
+		} catch (e) {
+			console.error(e)
+		}
 	},
-	mounted() {
+	computed: {
+		...mapGetters(['userName']),
+	},
+	/**  Bind Vuexfire on client-side: */
+	async mounted() {
+		try {
+			await this.$store.dispatch('bindUserDocument')
+		} catch (e) {
+			console.error(e)
+		}
 		;(this.$refs.app as HTMLElement).classList.add('loaded')
 	},
+
 	methods: {
 		logout() {
 			this.$fire.auth.signOut()
