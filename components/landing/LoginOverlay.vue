@@ -58,7 +58,6 @@ export default Vue.extend({
 				this.message = "Couldn't log in... Try again in a few minutes."
 				return
 			}
-			this.$store.commit('SET_USER', auth.currentUser)
 			this.$router.push({ path: '/dashboard' })
 		},
 		switchLoginOverlay() {

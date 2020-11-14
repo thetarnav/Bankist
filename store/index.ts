@@ -34,12 +34,6 @@ export const getters: GetterTree<RootState, RootState> = {
 		else if (name) userName = name
 		else if (lastName) userName = lastName
 		else if (email) userName = email
-
-		// return (
-		// 	((name || '') + lastName ? ` ${lastName}` : '') ||
-		// 	email ||
-		// 	'anonymous'
-		// ).trim()
 		return userName.trim()
 	},
 }

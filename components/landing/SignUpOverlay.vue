@@ -77,7 +77,6 @@ export default Vue.extend({
 			}
 
 			window.localStorage.setItem('signedBefore', 'true')
-			this.$store.commit('SET_USER', auth.currentUser)
 			this.$router.push({ path: '/dashboard' })
 		},
 		switchLoginOverlay() {
