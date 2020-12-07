@@ -17,7 +17,7 @@
     "@nuxtjs/firebase": "^7.1.0",
     "@types/lodash.debounce": "^4.0.6",
     "check-password-strength": "^1.0.15",
-    "core-js": "^3.7.0",
+    "core-js": "^3.8.1",
     "firebase": "^8.0.2",
     "firebase-tools": "^8.16.2",
     "lodash.debounce": "^4.0.8",
