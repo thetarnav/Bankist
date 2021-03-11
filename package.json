@@ -21,7 +21,7 @@
     "firebase": "^8.0.2",
     "firebase-tools": "^8.16.2",
     "lodash.debounce": "^4.0.8",
-    "nuxt": "^2.14.6",
+    "nuxt": "^2.15.3",
     "swiper": "^5.4.5",
     "vue-awesome-swiper": "^4.1.1",
     "vue-global-events": "^1.2.1",
